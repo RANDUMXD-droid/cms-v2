@@ -1,24 +1,13 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PageForge CMS – Sign in</title><link rel="stylesheet" href="css/style.css"></head>
-<body><div class="topbar auth-top"><b>PageForge</b><span style="flex:1"></span><span class="theme-tog" id="tm">🌙</span></div><div class="auth"><section class="hero"><h1>Build and publish web pages without code.</h1><p>PageForge is a content management system where authors draft pages with drag-and-drop blocks, rich text formatting, and admins review, schedule and publish them.</p>
-<ul><li>🎨 Drag-and-drop editor</li><li>📅 Schedule posts</li><li>✅ Approval workflow</li><li>📊 Version history</li><li>💬 Comments</li><li>🌙 Dark mode</li></ul></section>
-<section class="formside"><div class="box"><div class="tabs"><button id="tl" class="on">Log in</button><button id="ts">Sign up</button></div>
-<form id="fl"><label>Email<input type="email" id="le" required></label><label>Password<input type="password" id="lp" required></label><div class="msg" id="lm"></div><button class="pri" style="width:100%">Log in</button>
-<p class="hint">Demo: admin@cms.com / admin123</p></form>
-<form id="fs" hidden><label>Full name<input id="sn" required></label><label>Email<input type="email" id="se" required></label><label>Password (min 6)<input type="password" id="sp" minlength="6" required></label>
-<label>Account type<select id="sr"><option value="user">User (author)</option><option value="admin">Admin</option></select></label><label id="ac" hidden>Admin code<input id="sc" placeholder="Enter admin code"></label>
-<div class="msg" id="sm"></div><button class="pri" style="width:100%">Create account</button><p class="hint">Admin code: ADMIN2026</p></form></div></section></div>
-<script src="js/common.js"></script><script>
-const u0=me();if(u0)location.href=home(u0.role);
-const fl=$('#fl'),fs=$('#fs');
-$('#tm').onclick=()=>setDark(!getDark());
-function tab(l){fl.hidden=!l;fs.hidden=l;$('#tl').classList.toggle('on',l);$('#ts').classList.toggle('on',!l)}
-$('#tl').onclick=()=>tab(true);$('#ts').onclick=()=>tab(false);
-$('#sr').onchange=e=>$('#ac').hidden=e.target.value!=='admin';
-fl.onsubmit=e=>{e.preventDefault();const u=DB.get('users',[]).find(x=>x.email===$('#le').value.trim().toLowerCase()&&x.pass===$('#lp').value);
- if(!u){$('#lm').textContent='Wrong email or password.';return}localStorage.setItem('session',u.id);location.href=home(u.role)};
-fs.onsubmit=e=>{e.preventDefault();const us=DB.get('users',[]),em=$('#se').value.trim().toLowerCase(),r=$('#sr').value,m=$('#sm');
- if(us.some(x=>x.email===em)){m.textContent='This email is already registered.';return}
- if(r==='admin'&&$('#sc').value!=='ADMIN2026'){m.textContent='Invalid admin code.';return}
- us.push({id:uid(),name:$('#sn').value.trim(),email:em,pass:$('#sp').value,role:r});DB.set('users',us);
- m.className='msg ok';m.textContent='Account created. Please log in.';fs.reset();setTimeout(()=>{tab(true);$('#le').value=em},900)};
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PageForge content management system" />
+    <title>PageForge CMS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

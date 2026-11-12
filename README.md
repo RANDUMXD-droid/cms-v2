@@ -1,10 +1,14 @@
-# PageForge v2 – Enhanced CMS
+# PageForge CMS
 
-All HTML + CSS + JavaScript. Local Storage only. No server needed.
+A React-based content management demo built with Vite. Account and content data are stored in the browser's Local Storage; no backend is required.
 
-**Run:** open `index.html`
+**Run locally:** `npm install` then `npm run dev`
+
+**Production build:** `npm run build` (output is written to `dist/`)
 
 **Demo login:** admin@cms.com / admin123
+
+The app is a single-page React application. It has one HTML mount point (`index.html`); login, author, admin, and public page screens are React components routed with URL hashes.
 
 ---
 
@@ -61,12 +65,13 @@ All HTML + CSS + JavaScript. Local Storage only. No server needed.
 ## Architecture
 
 **Files:**
-- `index.html` – Auth (login/signup)
-- `admin.html` – Analytics, approvals, scheduling, user roles
-- `user.html` – Author dashboard, templates, version history
-- `view.html` – Public page viewer
-- `js/common.js` – All state logic, editor, rendering
+- `index.html` – Single HTML mount point for the React app
+- `src/App.jsx` – React application, CMS screens, editor, and state
+- `src/main.jsx` – React entry point
+- `vite.config.js` – Vite configuration
 - `css/style.css` – Design system with dark mode
+
+**Routes:** `#/login`, `#/admin`, `#/author`, and `#/page/:id`
 
 **Data (Local Storage):**
 - `users` – accounts with roles
